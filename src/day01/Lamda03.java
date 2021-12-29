@@ -1,6 +1,7 @@
 package day01;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Lamda03 {
     public static void main(String[] args) {
@@ -35,6 +36,10 @@ public class Lamda03 {
         System.out.println("  ***  ");
 
         karakBuy(list);
+        System.out.println();
+        System.out.println("  ***  ");
+
+        ilkElHaricSonHarfSira(list);
         System.out.println();
         System.out.println("  ***  ");
     }
@@ -80,10 +85,16 @@ public class Lamda03 {
     }
     //karaker sayisinin en buyuk elemanini yazdirin
     public static void karakBuy(List<String> list){
-        System.out.println(list.
+        Stream <String> sonIsim = list.
                 stream().
-                sorted(Comparator.comparing(t-> t.toString().length()).//length karakter uzunluguna gore siraladi
+                sorted(Comparator.comparing(t -> t.toString().length()).//length karakter uzunluguna gore siraladi
                         reversed()).//ters siralama
-                findFirst());//ilk elemani aldi
+                // findFirst());//ilk elemani aldi
+                        limit(1);
+        System.out.println(Arrays.toString(sonIsim.toArray()));// array yazdirdik, sonra akisdan cikan elemani arraye cevirdik
+    }
+    //list elemanlarinin son harfine gore siralayip, ilk eleman haric kalan elemanlari yazdirin
+    public static void ilkElHaricSonHarfSira(List<String> list){
+        list.stream().sorted(Comparator.comparing(t-> t.toString().charAt(t.length()-1))).skip(1).forEach(System.out::println);//skip 1
     }
 }
