@@ -39,6 +39,15 @@ public class Lambda04 {
         System.out.println();
         System.out.println("   ***   ");
         System.out.println(ogrcSayisi130BykBatchOrt(list));
+        System.out.println(gunduzBatchSayi(list));
+        System.out.println();
+        System.out.println("   ***   ");
+        System.out.println(ogSayi130BuyukBatchOrtBul(list));
+        System.out.println();
+        System.out.println("   ***   ");
+        System.out.println(ogSayi150AzBatchOrtBul(list));
+        System.out.println();
+        System.out.println("   ***   ");
 
 
     }
@@ -123,6 +132,18 @@ public class Lambda04 {
                 filter(t->t.getOgrcSayisi()>130).
                 mapToDouble(t->t.getBatchOrt()).
                 average();
-
+   }
+    //task 09-->gunduz batch'lerinin sayisini  yazdiriniz.
+    public static int gunduzBatchSayi(List<TechPro> list){
+      return (int) list.//int casting yaptik
+              stream().filter(t-> t.getBatchName().contains("gunduz")).count();
+    }
+    //task 10-->Ogrenci sayilari 130'dan fazla olan batch'lerin en buyuk batch ort'unu bulunuz
+    public static OptionalInt ogSayi130BuyukBatchOrtBul(List<TechPro> list){
+        return list.stream().filter(t-> t.getOgrcSayisi()>130).mapToInt(TechPro::getBatchOrt).max();
+    }
+    //task 11-->Ogrenci sayilari 150'dan az olan batch'lerin en kucuk batch ort'unu bulunuz.
+    public static OptionalInt ogSayi150AzBatchOrtBul(List<TechPro> list){
+        return list.stream().filter(t-> t.getOgrcSayisi()<150).mapToInt(TechPro::getBatchOrt).min();
     }
 }
